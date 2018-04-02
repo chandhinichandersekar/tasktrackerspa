@@ -1,0 +1,30 @@
+/* This file is for your main application css. */
+@import "bootstrap";
+
+
+
+.text-success {
+  float: right;
+}
+
+.text-info {
+  float: right;
+}
+
+.completedInput {
+  vertical-align: middle;
+  float: right;
+}
+
+.completedLabel {
+   display: block;
+   float: left;
+   padding-right: 30px;
+   white-space: nowrap;
+}
+ //  referred from https://stackoverflow.com/questions/5119711/whats-the-easiest-way-to-put-space-between-2-side-by-side-buttons-in-asp-net
+.divider{
+    width:15px;
+    height:auto;
+    display:inline-block;
+}
