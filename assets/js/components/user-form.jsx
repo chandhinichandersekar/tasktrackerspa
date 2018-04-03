@@ -1,3 +1,4 @@
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
@@ -13,13 +14,10 @@ function UserForm(params) {
       type: 'UPDATE_USER_FORM',
       data: data,
     };
-    console.log(action);
     params.dispatch(action);
   }
 
   function submit(ev) {
-    console.log("Should create user.");
-    console.log(params.form);
     var user_struct = {name: params.form.name, password: params.form.pass}
     api.submit_user(user_struct);
     location.reload(true);
@@ -48,13 +46,11 @@ function UserForm(params) {
     <Button onClick={submit} color="primary">Create User</Button>
     <div className="divider"/>
     <Button onClick={clear}>Clear</Button>
-
   </div>
 );
 }
 
 function state2props(state) {
-  console.log("rerender", state);
   return { form: state.userform,
   users: state.users,
  };

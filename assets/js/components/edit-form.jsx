@@ -1,4 +1,5 @@
 // referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+//referred the usage of Link from https://knowbody.github.io/react-router-docs/api/Link.html
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
@@ -72,7 +73,7 @@ function EditForm(params) {
       <Label for="completed" className="completedLabel">Task status</Label>
       <Input className="completedInput" type="select" name="completed" value={params.form.completed ? "Completed" : "In Progress" } onChange={update} >
         <option>In Progress</option>
-          <option>Completed</option>
+        <option>Completed</option>
       </Input>
     </FormGroup> <br /> <br /> <br /> <br />
     <Button onClick={clear}>Clear</Button>

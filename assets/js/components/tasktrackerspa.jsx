@@ -1,3 +1,4 @@
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -23,10 +24,8 @@ let Tasktrackerspa = connect((state) => state)((props) => {
   if(props.token) {
     return (
       <Router>
-
         <div>
           <Nav />
-
           <Route path="/" exact={true} render={() =>
             <div>
               <Feed tasks={props.tasks} />

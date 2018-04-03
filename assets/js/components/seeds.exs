@@ -9,6 +9,8 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+# referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+
 defmodule Seeds do
   alias Tasktrackerspa.Repo
   alias Tasktrackerspa.Users.User

@@ -1,3 +1,5 @@
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+//referred the usage of Link from https://knowbody.github.io/react-router-docs/api/Link.html
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Form, FormGroup, NavItem, Input, Button } from 'reactstrap';
@@ -17,7 +19,6 @@ let LoginForm = connect(({login}) => {return {login};})((props) => {
 
   function create_token(ev) {
     api.submit_login(props.login);
-    console.log(props.login);
   }
 
   return (

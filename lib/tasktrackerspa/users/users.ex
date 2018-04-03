@@ -101,6 +101,7 @@ defmodule Tasktrackerspa.Users do
       %Ecto.Changeset{source: %User{}}
 
   """
+  # referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
   def get_and_auth_user(name, pass) do
       user = Repo.one(from u in User, where: u.name == ^name)
       Comeonin.Argon2.check_pass(user, pass)

@@ -1,3 +1,4 @@
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
 import { createStore, combineReducers } from 'redux';
 import deepFreeze from 'deep-freeze';
 
@@ -116,13 +117,8 @@ function login(state = empty_login, action) {
 }
 
 function root_reducer(state0, action) {
-  console.log("reducer", action);
-  // {posts, users, form} is ES6 shorthand for
-  // {posts: posts, users: users, form: form}
   let reducer = combineReducers({tasks, users, form, token, login, userform, editform});
-  //let reducer = combineReducers({tasks, users, form});
   let state1 = reducer(state0, action);
-  console.log("state1", state1);
   return deepFreeze(state1);
 };
 

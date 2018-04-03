@@ -1,3 +1,5 @@
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+//referred the usage of Link from https://knowbody.github.io/react-router-docs/api/Link.html
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
@@ -8,11 +10,8 @@ function TaskForm(params) {
   function update(ev) {
     let tgt = $(ev.target);
     let data = {};
-    //data[tgt.attr('name')] = tgt.val();
-    // in update function
     data[tgt.attr('name')] = tgt.val();
     if (tgt.attr('name') == "completed") {
-      console.log(tgt.val());
       if(tgt.val()=="In Progress") {
       data['completed'] = false;
       }
@@ -24,19 +23,14 @@ function TaskForm(params) {
       type: 'UPDATE_FORM',
       data: data,
     };
-    console.log(action);
     params.dispatch(action);
   }
 
   function submit(ev) {
-    console.log("Should create post.");
-    console.log(params.form);
     api.submit_task(params.form);
   }
 
   function edit(ev) {
-    console.log("Should create post.");
-    console.log(params.form);
     var task_id = params.form.id;
     api.edit_task(params.form, task_id);
   }
@@ -79,19 +73,18 @@ function TaskForm(params) {
     <FormGroup>
       <Label for="completed" className="completedLabel">Task status</Label>
       <Input className="completedInput" type="select" name="completed" value={params.form.completed ? "Completed" : "In Progress" } onChange={update} >
-        <option>In Progress</option>
+          <option>In Progress</option>
           <option>Completed</option>
       </Input>
     </FormGroup> <br /> <br />
     <Link className="btn btn-primary" to={"/"} onClick={submit}>Create Task</Link>
-   <div className="divider"/>
+       <div className="divider"/>
     <Button onClick={clear}>Clear</Button>
   </div>
 );
 }
 
 function state2props(state) {
-  console.log("rerender", state);
   return { form: state.form,
   users: state.users,
  };

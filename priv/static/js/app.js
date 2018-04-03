@@ -47342,7 +47342,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+// referred from prof Nat Tuck's lecture on Associations and AJAX http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/14-assoc-and-ajax/notes.html
+//referred from my previous assignment https://github.com/chandhinichandersekar/tasktracker2
+
 
 var _store = require("./store");
 
@@ -47518,6 +47521,7 @@ $(function () {
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
 
 });
 
@@ -47548,11 +47552,8 @@ function EditForm(params) {
   function update(ev) {
     var tgt = $(ev.target);
     var data = {};
-    //data[tgt.attr('name')] = tgt.val();
-    // in update function
     data[tgt.attr('name')] = tgt.val();
     if (tgt.attr('name') == "completed") {
-      console.log(tgt.val());
       if (tgt.val() == "In Progress") {
         data['completed'] = false;
       } else {
@@ -47563,19 +47564,14 @@ function EditForm(params) {
       type: 'UPDATE_EDIT_FORM',
       data: data
     };
-    console.log(action);
     params.dispatch(action);
   }
 
   function submit(ev) {
-    console.log("Should create post.");
-    console.log(params.form);
     _api2.default.submit_task(params.form);
   }
 
   function edit(ev) {
-    console.log("Should create post.");
-    console.log(params.form);
     var task_id = params.form.id;
     _api2.default.edit_task(params.form, task_id);
   }
@@ -47709,10 +47705,11 @@ function EditForm(params) {
       'Save edited Task'
     )
   );
-}
+} // referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+//referred the usage of Link from https://knowbody.github.io/react-router-docs/api/Link.html
+
 
 function state2props(state) {
-  console.log("rerender", state);
   return { form: state.editform,
     users: state.users
   };
@@ -47793,7 +47790,6 @@ var LoginForm = (0, _reactRedux.connect)(function (_ref) {
 
   function create_token(ev) {
     _api2.default.submit_login(props.login);
-    console.log(props.login);
   }
 
   return _react2.default.createElement(
@@ -47821,7 +47817,9 @@ var LoginForm = (0, _reactRedux.connect)(function (_ref) {
       )
     )
   );
-});
+}); // referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+//referred the usage of Link from https://knowbody.github.io/react-router-docs/api/Link.html
+
 
 var Session = (0, _reactRedux.connect)(function (_ref2) {
   var token = _ref2.token;
@@ -47944,11 +47942,8 @@ function TaskForm(params) {
   function update(ev) {
     var tgt = $(ev.target);
     var data = {};
-    //data[tgt.attr('name')] = tgt.val();
-    // in update function
     data[tgt.attr('name')] = tgt.val();
     if (tgt.attr('name') == "completed") {
-      console.log(tgt.val());
       if (tgt.val() == "In Progress") {
         data['completed'] = false;
       } else {
@@ -47959,19 +47954,14 @@ function TaskForm(params) {
       type: 'UPDATE_FORM',
       data: data
     };
-    console.log(action);
     params.dispatch(action);
   }
 
   function submit(ev) {
-    console.log("Should create post.");
-    console.log(params.form);
     _api2.default.submit_task(params.form);
   }
 
   function edit(ev) {
-    console.log("Should create post.");
-    console.log(params.form);
     var task_id = params.form.id;
     _api2.default.edit_task(params.form, task_id);
   }
@@ -48102,10 +48092,11 @@ function TaskForm(params) {
       'Clear'
     )
   );
-}
+} // referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+//referred the usage of Link from https://knowbody.github.io/react-router-docs/api/Link.html
+
 
 function state2props(state) {
-  console.log("rerender", state);
   return { form: state.form,
     users: state.users
   };
@@ -48139,22 +48130,19 @@ var _reactRouterDom = require('react-router-dom');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+//referred the usage of Link from https://knowbody.github.io/react-router-docs/api/Link.html
 function Task(params) {
   var task = params.task;
-  console.log(params.task.assigned);
   function submit(ev) {
-    console.log("Should delete post.");
-
     _api2.default.delete_task(params.task.id);
   }
-  function edit_task(ev) {
 
-    console.log("Should edit post.");
+  function edit_task(ev) {
     var action = {
       type: 'UPDATE_EDIT_FORM',
       data: params.task
     };
-    console.log(action);
     params.dispatch(action);
     //api.edit_task(params.task, params.task.id);
   }
@@ -48236,7 +48224,6 @@ function Task(params) {
 }
 
 function state2props(state) {
-  console.log("rerender", state);
   return { form: state.form,
     users: state.users
   };
@@ -48293,6 +48280,7 @@ var _editForm2 = _interopRequireDefault(_editForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
 function tasktrackerspa_init(store) {
   _reactDom2.default.render(_react2.default.createElement(
     _reactRedux.Provider,
@@ -48408,6 +48396,7 @@ var _api2 = _interopRequireDefault(_api);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
 function UserForm(params) {
   function update(ev) {
     var tgt = $(ev.target);
@@ -48418,13 +48407,10 @@ function UserForm(params) {
       type: 'UPDATE_USER_FORM',
       data: data
     };
-    console.log(action);
     params.dispatch(action);
   }
 
   function submit(ev) {
-    console.log("Should create user.");
-    console.log(params.form);
     var user_struct = { name: params.form.name, password: params.form.pass };
     _api2.default.submit_user(user_struct);
     location.reload(true);
@@ -48478,7 +48464,6 @@ function UserForm(params) {
 }
 
 function state2props(state) {
-  console.log("rerender", state);
   return { form: state.userform,
     users: state.users
   };
@@ -48490,41 +48475,38 @@ exports.default = (0, _reactRedux.connect)(state2props)(UserForm);
 });
 
 require.register("js/components/users.jsx", function(exports, require, module) {
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = Users;
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = require('react-router-dom');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function User(params) {
   return _react2.default.createElement(
-    'p',
+    "p",
     null,
     params.user.name,
-    ' - ',
+    " - ",
     _react2.default.createElement(
-      _reactRouterDom.Link,
+      Link,
       { to: "/users/" + params.user.id },
-      'posts'
+      "posts"
     )
   );
-}
-
+} // referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
 function Users(params) {
   var users = _.map(params.users, function (uu) {
     return _react2.default.createElement(User, { key: uu.id, user: uu });
   });
   return _react2.default.createElement(
-    'div',
+    "div",
     null,
     users
   );
@@ -48621,7 +48603,8 @@ var _deepFreeze2 = _interopRequireDefault(_deepFreeze);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } } // referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+
 
 /*
  *  state layout:
@@ -48758,13 +48741,8 @@ function login() {
 }
 
 function root_reducer(state0, action) {
-  console.log("reducer", action);
-  // {posts, users, form} is ES6 shorthand for
-  // {posts: posts, users: users, form: form}
   var reducer = (0, _redux.combineReducers)({ tasks: tasks, users: users, form: form, token: token, login: login, userform: userform, editform: editform });
-  //let reducer = combineReducers({tasks, users, form});
   var state1 = reducer(state0, action);
-  console.log("state1", state1);
   return (0, _deepFreeze2.default)(state1);
 };
 

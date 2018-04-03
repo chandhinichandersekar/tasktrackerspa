@@ -19,7 +19,7 @@ defmodule Tasktrackerspa.Users.User do
     |> put_pass_hash()
     |> validate_required([:name])
   end
-  
+  #referred from Prof Nat Tucks nu_mart password validation https://github.com/NatTuck/nu_mart/blob/prep-1016/lib/nu_mart/accounts/user.ex
   def put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
       change(changeset, Comeonin.Argon2.add_hash(password))
     end

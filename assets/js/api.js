@@ -1,3 +1,6 @@
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
+// referred from prof Nat Tuck's lecture on Associations and AJAX http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/14-assoc-and-ajax/notes.html
+//referred from my previous assignment https://github.com/chandhinichandersekar/tasktracker2
 import store from './store';
 
 class TheServer {
@@ -67,8 +70,6 @@ class TheServer {
       },
     });
   }
-
-
 
 submit_login(data) {
     $.ajax("/api/v1/token", {
