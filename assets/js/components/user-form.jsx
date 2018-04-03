@@ -10,7 +10,7 @@ function UserForm(params) {
     data[tgt.attr('name')] = tgt.val();
 
     let action = {
-      type: 'UPDATE_FORM',
+      type: 'UPDATE_USER_FORM',
       data: data,
     };
     console.log(action);
@@ -27,7 +27,7 @@ function UserForm(params) {
 
   function clear(ev) {
       params.dispatch({
-        type: 'CLEAR_FORM',
+        type: 'CLEAR_USER_FORM',
       });
     }
   return (
@@ -46,13 +46,16 @@ function UserForm(params) {
     </FormGroup>
 
     <Button onClick={submit} color="primary">Create User</Button>
+    <div className="divider"/>
+    <Button onClick={clear}>Clear</Button>
+
   </div>
 );
 }
 
 function state2props(state) {
   console.log("rerender", state);
-  return { form: state.form,
+  return { form: state.userform,
   users: state.users,
  };
 }

@@ -8,6 +8,7 @@ import Feed from './feed';
 import Users from './users';
 import TaskForm from './task-form';
 import UserForm from './user-form';
+import EditForm from './edit-form';
 
 export default function tasktrackerspa_init(store) {
   ReactDOM.render(
@@ -22,11 +23,12 @@ let Tasktrackerspa = connect((state) => state)((props) => {
   if(props.token) {
     return (
       <Router>
+
         <div>
           <Nav />
+
           <Route path="/" exact={true} render={() =>
             <div>
-              <TaskForm users={props.users} root={this} />
               <Feed tasks={props.tasks} />
             </div>
           } />
@@ -35,6 +37,11 @@ let Tasktrackerspa = connect((state) => state)((props) => {
               <TaskForm users={props.users} root={this} />
             </div>
           } />
+        <Route path="/edit" exact={true} render={() =>
+              <div>
+                <EditForm users={props.users} root={this} />
+              </div>
+            } />
           <Route path="/users" exact={true} render={() =>
             <Users users={props.users} />
           } />
@@ -52,6 +59,13 @@ let Tasktrackerspa = connect((state) => state)((props) => {
       <Router>
         <div>
           <Nav />
+          <br />
+          <br />
+            <div className="text-center">
+              <h1> Welcome to Task Tracker </h1>
+                <p className="text-primary"> If you are a registered user enter your username, password and click Login </p>
+                <p className="text-primary"> If you are a new user click on new user to register and then Login</p>
+              </div>
         <Route path="/user" exact={true} render={() =>
               <div>
                 <UserForm users={props.users} root={this} />

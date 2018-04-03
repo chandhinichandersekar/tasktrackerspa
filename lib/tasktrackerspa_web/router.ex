@@ -21,6 +21,7 @@ defmodule TasktrackerspaWeb.Router do
     get "/tasks", PageController, :index
     get "/task", PageController, :index
     get "/user", PageController, :index
+    get "/edit", PageController, :index
     get "/users/:id", PageController, :index
   end
 

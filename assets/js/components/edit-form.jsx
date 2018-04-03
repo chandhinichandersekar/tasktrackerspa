@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import api from '../api';
+import { NavLink, Link } from 'react-router-dom';
 
-function TaskForm(params) {
+function EditForm(params) {
   function update(ev) {
     let tgt = $(ev.target);
     let data = {};
@@ -21,7 +21,7 @@ function TaskForm(params) {
       }
     }
     let action = {
-      type: 'UPDATE_FORM',
+      type: 'UPDATE_EDIT_FORM',
       data: data,
     };
     console.log(action);
@@ -48,13 +48,12 @@ function TaskForm(params) {
     }
   let users = _.map(params.users, (uu) => <option key={uu.id} value={uu.id}>{uu.name}</option>);
   let users_name = _.map(params.users, (uu) => <option key={uu.id} value={uu.name}>{uu.name}</option>);
-
   return (
     <div style={ {padding: "4ex"} }>
-    <h2>New Task</h2>
+    <h2>Edit Task</h2>
     <FormGroup>
       <Label for="user_id">Your User ID</Label>
-      <Input type="textarea" name="user_id" value={params.form.user_id} onChange={update} disabled>
+      <Input type="textarea" name="user_id" value={params.form.user_id} onChange={update}>
       </Input>
     </FormGroup>
     <FormGroup>
@@ -74,7 +73,7 @@ function TaskForm(params) {
     </FormGroup>
     <FormGroup>
       <Label for="time">Time spent</Label>
-      <Input type="number" name="time" step="15" min="0" value={params.form.time} onChange={update} />
+      <Input type="number" name="time" step="15" min="0" value={params.form.time} onChange={update} required/>
     </FormGroup>
     <FormGroup>
       <Label for="completed" className="completedLabel">Task status</Label>
@@ -82,20 +81,20 @@ function TaskForm(params) {
         <option>In Progress</option>
           <option>Completed</option>
       </Input>
-    </FormGroup> <br /> <br />
-    <Link className="btn btn-primary" to={"/"} onClick={submit}>Create Task</Link>
-   <div className="divider"/>
+    </FormGroup> <br /> <br /> <br /> <br />
     <Button onClick={clear}>Clear</Button>
+     <div className="divider"/>
+      <Link className="btn btn-primary" to={"/"} onClick={edit}>Save edited Task</Link>
   </div>
 );
 }
 
 function state2props(state) {
   console.log("rerender", state);
-  return { form: state.form,
+  return { form: state.editform,
   users: state.users,
  };
 }
 
 // Export the result of a curried function call.
-export default connect(state2props)(TaskForm);
+export default connect(state2props)(EditForm);
