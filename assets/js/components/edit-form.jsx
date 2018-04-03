@@ -1,3 +1,4 @@
+// referred from prof Nat Tuck's lecture on Redux http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/notes/20-redux/notes.html
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
@@ -8,11 +9,8 @@ function EditForm(params) {
   function update(ev) {
     let tgt = $(ev.target);
     let data = {};
-    //data[tgt.attr('name')] = tgt.val();
-    // in update function
     data[tgt.attr('name')] = tgt.val();
     if (tgt.attr('name') == "completed") {
-      console.log(tgt.val());
       if(tgt.val()=="In Progress") {
       data['completed'] = false;
       }
@@ -24,19 +22,14 @@ function EditForm(params) {
       type: 'UPDATE_EDIT_FORM',
       data: data,
     };
-    console.log(action);
     params.dispatch(action);
   }
 
   function submit(ev) {
-    console.log("Should create post.");
-    console.log(params.form);
     api.submit_task(params.form);
   }
 
   function edit(ev) {
-    console.log("Should create post.");
-    console.log(params.form);
     var task_id = params.form.id;
     api.edit_task(params.form, task_id);
   }
@@ -90,7 +83,6 @@ function EditForm(params) {
 }
 
 function state2props(state) {
-  console.log("rerender", state);
   return { form: state.editform,
   users: state.users,
  };
