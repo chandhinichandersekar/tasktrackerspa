@@ -51,7 +51,7 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
        data: "",
       success: (resp) => {
-        console.log("deleted");
+      this.request_tasks();
       },
     });
   }
@@ -63,10 +63,7 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
        data: JSON.stringify({ token: data.token, task: data }),
       success: (resp) => {
-        store.dispatch({
-          type: 'EDIT_TASK',
-          task: resp.data,
-        });
+        this.request_tasks();
       },
     });
   }
