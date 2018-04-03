@@ -53,8 +53,8 @@ function TaskForm(params) {
     <div style={ {padding: "4ex"} }>
     <h2>New Task</h2>
     <FormGroup>
-      <Label for="user_id">Your User ID</Label>
-      <Input type="textarea" name="user_id" value={params.form.user_id} onChange={update} disabled>
+      <Label for="user_id">Your User ID </Label>
+      <Input type="textarea" name="user_id" value={params.form.user_id} onChange={update} placeholder="Enter your user id as on the nav bar">
       </Input>
     </FormGroup>
     <FormGroup>

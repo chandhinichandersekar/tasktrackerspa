@@ -40,6 +40,7 @@ import deepFreeze from 'deep-freeze';
  }
 
 let empty_form = {
+  user_id: "",
   body: "",
   title: "",
   time: 0,
