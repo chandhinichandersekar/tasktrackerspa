@@ -18,9 +18,10 @@ function UserForm(params) {
   }
 
   function submit(ev) {
-    console.log("Should create post.");
+    console.log("Should create user.");
     console.log(params.form);
-    api.submit_user(params.form);
+    var user_struct = {name: params.form.name, password: params.form.pass}
+    api.submit_user(user_struct);
     location.reload(true);
   }
 
@@ -51,7 +52,7 @@ function UserForm(params) {
 
 function state2props(state) {
   console.log("rerender", state);
-  return { form: state.userform,
+  return { form: state.form,
   users: state.users,
  };
 }

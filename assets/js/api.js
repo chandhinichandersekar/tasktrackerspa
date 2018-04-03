@@ -56,6 +56,23 @@ class TheServer {
     });
   }
 
+  edit_task(data,task_id) {
+    $.ajax("/api/v1/tasks"+ "/" + task_id, {
+      method: "patch",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+       data: JSON.stringify({ token: data.token, task: data }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'EDIT_TASK',
+          task: resp.data,
+        });
+      },
+    });
+  }
+
+
+
 submit_login(data) {
     $.ajax("/api/v1/token", {
       method: "post",

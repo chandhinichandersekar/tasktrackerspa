@@ -12,9 +12,7 @@ defmodule TasktrackerspaWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    user_pass = Map.get(user_params, "pass")
-    hashed_pass = Comeonin.Argon2.hashpwsalt(user_pass)
-    user_params = Map.replace!(user_params, "pass", hashed_pass)
+    
 
     #IO.inspect user_pass
     #IO.inspect hashed_pass

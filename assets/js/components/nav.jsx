@@ -56,6 +56,28 @@ function Nav(props) {
     session_info = <LoginForm />
   }
 
+  if(props.token){
+    return (
+      <nav className="navbar navbar-dark bg-dark navbar-expand">
+        <span className="navbar-brand">
+          Task Tracker
+        </span>
+        <ul className="navbar-nav mr-auto">
+          <NavItem>
+            <NavLink to="/" exact={true} activeClassName="active" className="nav-link">Task Feed</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/task" href="#"  className="nav-link">Create Task</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/users" href="#" className="nav-link">All Users</NavLink>
+          </NavItem>
+        </ul>
+        { session_info }
+      </nav>
+    );
+  }
+else {
   return (
     <nav className="navbar navbar-dark bg-dark navbar-expand">
       <span className="navbar-brand">
@@ -63,21 +85,15 @@ function Nav(props) {
       </span>
       <ul className="navbar-nav mr-auto">
         <NavItem>
-          <NavLink to="/" exact={true} activeClassName="active" className="nav-link">Task Feed</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink to="/task" href="#"  className="nav-link">Create Task</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink to="/user" href="#"  className="nav-link">New User</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink to="/users" href="#" className="nav-link">All Users</NavLink>
+          <NavLink to="/user" href="#"  activeClassName="active" className="nav-link">New User</NavLink>
         </NavItem>
       </ul>
       { session_info }
     </nav>
   );
+
+}
+
 }
 
 function state2props(state) {

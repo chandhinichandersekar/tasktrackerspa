@@ -50,13 +50,10 @@ defmodule Tasktrackerspa.Users do
 
   """
   def create_user(attrs \\ %{}) do
-    IO.inspect "attrs"
-    IO.inspect attrs
-    user_pass = Map.get(attrs, "pass")
-    user_name = Map.get(attrs, "name")
-    Repo.insert!(%User{ name: user_name, password_hash: user_pass })
-
-
+    %User{}
+    |> User.changeset(attrs)
+    |> Repo.insert()
+   #Repo.insert!(%User{ name: "alice", password_hash: p })
   end
 
 

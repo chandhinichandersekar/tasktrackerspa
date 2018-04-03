@@ -19,35 +19,47 @@ export default function tasktrackerspa_init(store) {
 }
 
 let Tasktrackerspa = connect((state) => state)((props) => {
-  return (
-    <Router>
-      <div>
-        <Nav />
-        <Route path="/" exact={true} render={() =>
-          <div>
-            <TaskForm users={props.users} root={this} />
-            <Feed tasks={props.tasks} />
-          </div>
-        } />
-      <Route path="/task" exact={true} render={() =>
-          <div>
-            <TaskForm users={props.users} root={this} />
-          </div>
-        } />
-      <Route path="/user" exact={true} render={() =>
+  if(props.token) {
+    return (
+      <Router>
+        <div>
+          <Nav />
+          <Route path="/" exact={true} render={() =>
             <div>
-              <UserForm users={props.users} root={this} />
+              <TaskForm users={props.users} root={this} />
+              <Feed tasks={props.tasks} />
             </div>
           } />
-        <Route path="/users" exact={true} render={() =>
-          <Users users={props.users} />
-        } />
-        <Route path="/users/:user_id" render={({match}) =>
-          <Feed tasks={_.filter(props.tasks, (pp) =>
-            match.params.user_id == pp.user.id )
+        <Route path="/task" exact={true} render={() =>
+            <div>
+              <TaskForm users={props.users} root={this} />
+            </div>
           } />
-        } />
-      </div>
-    </Router>
-  );
+          <Route path="/users" exact={true} render={() =>
+            <Users users={props.users} />
+          } />
+          <Route path="/users/:user_id" render={({match}) =>
+            <Feed tasks={_.filter(props.tasks, (pp) =>
+              match.params.user_id == pp.user.id )
+            } />
+          } />
+        </div>
+      </Router>
+    );
+  }
+  else {
+    return (
+      <Router>
+        <div>
+          <Nav />
+        <Route path="/user" exact={true} render={() =>
+              <div>
+                <UserForm users={props.users} root={this} />
+              </div>
+            } />
+        </div>
+      </Router>
+    );
+  }
+
 });

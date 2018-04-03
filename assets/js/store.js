@@ -23,8 +23,6 @@ import deepFreeze from 'deep-freeze';
      return [...action.tasks];
    case 'ADD_TASK':
      return [action.task, ...state];
-  case 'DELETE_TASK':
-     return [action.task, ...state];
    default:
      return state;
    }
@@ -34,17 +32,18 @@ import deepFreeze from 'deep-freeze';
    switch (action.type) {
    case 'USERS_LIST':
      return [...action.users];
+     case 'ADD_USER':
+       return [action.user, ...state];
    default:
      return state;
    }
  }
 
 let empty_form = {
-  user_id: "",
   body: "",
   title: "",
   completed: false,
-  time: "",
+  time: 0,
   assigned: "",
   token: "",
 };
@@ -85,28 +84,11 @@ function login(state = empty_login, action) {
   }
 }
 
-let empty_user = {
-  name: "",
-  pass: "",
-}
-
-function userform(state = empty_user, action) {
-  switch (action.type) {
-    case 'UPDATE_FORM':
-      return Object.assign({}, state, action.data);
-      case 'CLEAR_FORM':
-        return empty_user;
-      default:
-        return state;
-  }
-}
-
-
 function root_reducer(state0, action) {
   console.log("reducer", action);
   // {posts, users, form} is ES6 shorthand for
   // {posts: posts, users: users, form: form}
-  let reducer = combineReducers({tasks, users, form, token, login, userform});
+  let reducer = combineReducers({tasks, users, form, token, login});
   //let reducer = combineReducers({tasks, users, form});
   let state1 = reducer(state0, action);
   console.log("state1", state1);

@@ -10,8 +10,12 @@ function TaskForm(params) {
     //data[tgt.attr('name')] = tgt.val();
     // in update function
 if (tgt.attr('name') == "completed") {
-  data["completed"] = $(tgt).is(':checked') ? 'true' : 'false';
+if(tgt.val()=="In progress") {
+data["completed"] = false;
 }
+else{
+  data["completed"] = true;
+}}
 else {
   data[tgt.attr('name')] = tgt.val();
 }
@@ -29,19 +33,26 @@ else {
     api.submit_task(params.form);
   }
 
+  function edit(ev) {
+    console.log("Should create post.");
+    console.log(params.form);
+    var task_id = params.form.id;
+    api.edit_task(params.form, task_id);
+  }
+
   function clear(ev) {
       params.dispatch({
         type: 'CLEAR_FORM',
       });
     }
   let users = _.map(params.users, (uu) => <option key={uu.id} value={uu.id}>{uu.name}</option>);
+  let users_name = _.map(params.users, (uu) => <option key={uu.id} value={uu.name}>{uu.name}</option>);
   return (
     <div style={ {padding: "4ex"} }>
     <h2>New Post</h2>
     <FormGroup>
       <Label for="user_id">User</Label>
       <Input type="textarea" name="user_id" value={params.form.user_id} onChange={update}>
-        { users }
       </Input>
     </FormGroup>
     <FormGroup>
@@ -52,7 +63,7 @@ else {
       <Label for="assigned">Assigned to</Label>
         <Input type="select" name="assigned" value={params.form.assigned} onChange={update} >
           <option default>Select an assignee</option>
-          { users }
+          { users_name }
         </Input>
     </FormGroup>
     <FormGroup>
@@ -61,15 +72,19 @@ else {
     </FormGroup>
     <FormGroup>
       <Label for="time">Time spent</Label>
-      <Input type="number" name="time" step="15" min="0" value={params.form.time} onChange={update} default="0"/>
+      <Input type="number" name="time" step="15" min="0" value={params.form.time} onChange={update} />
     </FormGroup>
     <FormGroup>
       <Label for="completed" className="completedLabel">Task status</Label>
-      <Input className="completedInput" type="checkbox" name="completed" checked={params.form.completed} onChange={update}  />
+      <Input className="completedInput" type="select" name="completed" onChange={update} >
+        <option>In Progress</option>
+          <option>Completed</option>
+      </Input>
     </FormGroup> <br /> <br />
   <Button onClick={submit} color="primary">Create Task</Button>
    <div className="divider"/>
     <Button onClick={clear}>Clear</Button>
+      <Button onClick={edit}>Edit Task</Button>
   </div>
 );
 }
