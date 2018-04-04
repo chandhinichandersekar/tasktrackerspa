@@ -101,7 +101,7 @@ function state2props(state) {
     token: state.token,
   };
 }
-
+// referred from https://github.com/react-bootstrap/react-router-bootstrap/issues/152
 //referred from https://github.com/reactjs/react-redux/blob/master/docs/troubleshooting.md
 export default connect(state2props,null,null,{
   pure: false
